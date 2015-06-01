@@ -3,7 +3,7 @@ package com.oracle.lnsd.service;
 import java.util.List;
 
 import com.oracle.lnsd.dao.StudentDao;
-import com.oracle.lnsd.dao.jdbcImpl.StudentDaoJdbcImpl3;
+import com.oracle.lnsd.dao.jdbcImpl.StudentDaoJdbcImpl2;
 import com.oracle.lnsd.entity.Student;
 /**
  * 学生数据处理的业务逻辑
@@ -11,7 +11,7 @@ import com.oracle.lnsd.entity.Student;
  *
  */
 public class StudentService {
-	private StudentDao studentDao = new StudentDaoJdbcImpl3();
+	private StudentDao studentDao = new StudentDaoJdbcImpl2();
 	
 	/**
 	 * 添加一个学生的业务逻辑

@@ -45,25 +45,15 @@ public class AddStudentServlet extends HttpServlet {
 			writer.println("<a href=\"addStudent.html\">跳转到添加页面</a>");
 		} else {
 			List<Student> studentList = this.studentService.studentList();
+			request.setAttribute("students", studentList);
+//			ServletContext servletContext = getServletContext();
+//			RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/WEB-INF/page/student/student-list.jsp");
+//			requestDispatcher.forward(request, response);
 			
-			writer.println("<table>                   ");
-			writer.println("	<tr>                  ");
-			writer.println("		<th>学生姓名</th> ");
-			writer.println("		<th>学生年龄</th> ");
-			writer.println("		<th>学生email</th>");
-			writer.println("	</tr>                 ");
-			writer.println("	<tbody>               ");
-			for (Student stu : studentList) {
-				writer.println("		<tr>              ");
-				writer.println("			<td>" + stu.getName() + "</td>     ");
-				writer.println("			<td>" + stu.getAge() + "</td>     ");
-				writer.println("			<td>" + stu.getEmail() + "</td>     ");
-				writer.println("		</tr>             ");
-			}
+//			getServletContext().getRequestDispatcher("/dajiangyou").include(request, response);
 			
-			writer.println("	</tbody>              ");
-			writer.println("</table>                  ");
-			writer.println("<a href=\"addStudent.html\">跳转到添加页面</a>");
+//			writer.println("学生一览");
+			getServletContext().getRequestDispatcher("/WEB-INF/page/student/student-list.jsp").forward(request, response);
 		}
 	}
 
