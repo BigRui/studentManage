@@ -33,7 +33,7 @@ public class AddStudentServlet extends HttpServlet {
 		int age = Integer.parseInt(age_str);
 		String email = request.getParameter("email");
 		
-		Student student = new Student(name, age, email);
+		Student student = new Student(null, name, age, email);
 		boolean isSuccess = this.studentService.addStudent(student);
 		
 		//一下处理生成页面
