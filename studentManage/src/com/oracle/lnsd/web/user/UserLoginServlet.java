@@ -56,7 +56,7 @@ public class UserLoginServlet extends HttpServlet {
 	    		passwordCookie.setPath("user");
 	    		response.addCookie(passwordCookie);
 	    	}
-	    	response.sendRedirect("http://localhost:8080/studentManage/student/add");
+	    	response.sendRedirect("http://localhost:8081/studentManage/student/add");
 	    } else {
 	    	//登陆失败了
 	    	request.setAttribute("loginFail", "用户名或密码错误");

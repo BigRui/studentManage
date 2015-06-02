@@ -11,7 +11,7 @@ import com.oracle.lnsd.entity.Student;
  *
  */
 public class StudentService {
-	private StudentDao studentDao = new StudentDaoJdbcImpl2();
+	private StudentDao studentDao = new StudentDaoJdbcImpl2(); 
 	
 	/**
 	 * 添加一个学生的业务逻辑
