@@ -1,4 +1,4 @@
-package com.oracle.lnsd.web;
+package com.oracle.lnsd.web.student;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,8 +16,8 @@ import com.oracle.lnsd.service.StudentService;
 /**
  * Servlet implementation class AddStudentServlet
  */
-@WebServlet("/addStudent")
-public class AddStudentServlet extends HttpServlet {
+@WebServlet("/student/add")
+public class StudentAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private StudentService studentService = new StudentService();
@@ -26,8 +26,8 @@ public class AddStudentServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String name = request.getParameter("name");
-		name = new String(name.getBytes("iso-8859-1"), "utf-8");
 		
 		String age_str = request.getParameter("age");
 		int age = Integer.parseInt(age_str);
@@ -50,11 +50,14 @@ public class AddStudentServlet extends HttpServlet {
 //			RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/WEB-INF/page/student/student-list.jsp");
 //			requestDispatcher.forward(request, response);
 			
-//			getServletContext().getRequestDispatcher("/dajiangyou").include(request, response);
-			
 //			writer.println("—ß…˙“ª¿¿");
 			getServletContext().getRequestDispatcher("/WEB-INF/page/student/student-list.jsp").forward(request, response);
 		}
 	}
-
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	        throws ServletException, IOException {
+	    getServletContext().getRequestDispatcher("/WEB-INF/page/student/student-add.jsp").forward(req, resp);
+	}
 }

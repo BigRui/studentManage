@@ -14,25 +14,12 @@ import javax.sql.DataSource;
 public class DButils {
 	private static Properties pro = new Properties();
 	static{
-		InputStream input = DButils.class.getResourceAsStream("/common.properties");
-		try {
+		try (InputStream input = DButils.class.getResourceAsStream("/common.properties")){
 	        pro.load(input);
-	        input.close();
-        } catch (IOException e1) {
-	        e1.printStackTrace();
-        } finally {
-        	try {
-	            input.close();
-            } catch (IOException e) {
-	            e.printStackTrace();
-            }
-        }
-		
-		try {
-			//1.加载数据库驱动
+	        //1.加载数据库驱动
 	        Class.forName(pro.getProperty("db.driver"));
-        } catch (ClassNotFoundException e) {
-	        e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e1) {
+	        e1.printStackTrace();
         }
 	}
 	/**
@@ -43,7 +30,11 @@ public class DButils {
 		Connection con = null;
 		try {
 			//2.取得Connection
-	        con = DriverManager.getConnection(pro.getProperty("db.url"), pro.getProperty("db.username"), pro.getProperty("db.password"));
+			String dbUrl = pro.getProperty("db.url");
+	        String dbPassword = pro.getProperty("db.password");
+			String dbUsername = pro.getProperty("db.username");
+			
+			con = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +54,8 @@ public class DButils {
         } catch (NamingException | SQLException e) {
 	        e.printStackTrace();
         }
+
 		return con;
 	}
+	
 }
