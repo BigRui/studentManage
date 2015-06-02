@@ -8,6 +8,7 @@
 </head>
 <body>
 欢迎：${sessionScope.user.realName }
+<a href="/studentManage/user/logout">退出登陆</a>
 <h1>添加学生信息</h1>
 <form action="add" method="post">
 		<label> 学生姓名：<input type="text" name="name" id="name" /></label></br>

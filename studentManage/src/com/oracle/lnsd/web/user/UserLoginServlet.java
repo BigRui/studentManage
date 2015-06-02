@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oracle.lnsd.entity.User;
+import com.oracle.lnsd.service.UserService;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -18,7 +19,7 @@ import com.oracle.lnsd.entity.User;
 @WebServlet("/user/login")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private UserService userService = new UserService();
 
 	/**
 	 * 访问登陆页面jsp
@@ -50,7 +51,9 @@ public class UserLoginServlet extends HttpServlet {
 	    //仔细体会一下redirect和forward的区别
 	    //redirect:重定向
 	    //forward：转发
-	    if("admin".equals(userName) && "123".equals(password)) {
+	    User user = this.userService.findUserByUserName(userName);
+	    //如果能够从数据库检索到指定名称的用户，并且密码还和提交的密码相同，那么就认为登陆成功
+	    if(user != null && password.equals(user.getPassword())) {
 	    	if(null != remenberMe) {
 	    		Cookie userNameCookie = new Cookie("userName", userName);
 	    		userNameCookie.setMaxAge(60);
@@ -61,7 +64,7 @@ public class UserLoginServlet extends HttpServlet {
 	    		passwordCookie.setPath("user");
 	    		response.addCookie(passwordCookie);
 	    	}
-	    	User user = new User(null, "admin", "张三", null);
+//	    	User user = new User(null, "admin", "张三", null);
 	    	HttpSession session = request.getSession();
 	    	session.setAttribute("user", user);
 	    	System.out.println("==========================================" + session.getId());
