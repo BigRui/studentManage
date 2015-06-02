@@ -12,6 +12,7 @@
 <title>学生一览</title>
 </head>
 <body>
+欢迎：${user.realName }
 	<table>
 	<tr>
 		<th>id</th>

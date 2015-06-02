@@ -7,6 +7,7 @@
 <title>添加学生</title>
 </head>
 <body>
+欢迎：${sessionScope.user.realName }
 <h1>添加学生信息</h1>
 <form action="add" method="post">
 		<label> 学生姓名：<input type="text" name="name" id="name" /></label></br>
@@ -16,4 +17,5 @@
 		<input type="reset" name="" id="" value="重置" />
 	</form>
 </body>
+
 </html>

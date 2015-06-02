@@ -8,6 +8,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.oracle.lnsd.entity.User;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -21,14 +24,16 @@ public class UserLoginServlet extends HttpServlet {
 	 * 访问登陆页面jsp
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-	        if("userName".equals(cookie.getName())) {
-	        	request.setAttribute("userName", cookie.getValue());
-	        }else if("password".equals(cookie.getName())) {
-	        	request.setAttribute("password", cookie.getValue());
-	        }
-        }
+//		Cookie[] cookies = request.getCookies();
+//		if (cookies != null) {
+//			for (Cookie cookie : cookies) {
+//				if ("userName".equals(cookie.getName())) {
+//					request.setAttribute("userName", cookie.getValue());
+//				} else if ("password".equals(cookie.getName())) {
+//					request.setAttribute("password", cookie.getValue());
+//				}
+//			}
+//		}
 		getServletContext().getRequestDispatcher("/WEB-INF/page/user/login.jsp").forward(request, response);
 	}
 	
@@ -56,7 +61,13 @@ public class UserLoginServlet extends HttpServlet {
 	    		passwordCookie.setPath("user");
 	    		response.addCookie(passwordCookie);
 	    	}
-	    	response.sendRedirect("http://localhost:8080/studentManage/student/add");
+	    	User user = new User(null, "admin", "张三", null);
+	    	HttpSession session = request.getSession();
+	    	session.setAttribute("user", user);
+	    	System.out.println("==========================================" + session.getId());
+	    	//如果客户禁用了cookie则需要对url进行编码，url后边会加上jsessionid
+	    	String url = response.encodeRedirectURL("http://localhost:8080/studentManage/student/add");
+	    	response.sendRedirect(url);
 	    } else {
 	    	//登陆失败了
 	    	request.setAttribute("loginFail", "用户名或密码错误");

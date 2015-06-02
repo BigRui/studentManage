@@ -18,11 +18,11 @@
 	<form action="/studentManage/user/login" method="post">
 		<label for="userName">
 			用户名：
-			<input type="text" name="userName" id="userName" value="${requestScope.userName }"/></label>
+			<input type="text" name="userName" id="userName" value="${cookie.userName.value }"/></label>
 		</br>
 		<label for="password">
 			密码：
-			<input type="password" name="password" id="password" value="${password }"/>
+			<input type="password" name="password" id="password" value="${cookie.password.value }"/>
 			</label>
 		</br>
 		记住用户名和密码：</br>
