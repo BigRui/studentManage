@@ -2,7 +2,6 @@ package com.oracle.lnsd.dao.serializeImpl;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -39,7 +38,7 @@ public class StudentDaoSerializeImpl implements StudentDao {
 	 * @return
 	 */
 	private File getDir() {
-		File dir= new File("d:/student-dir");
+		File dir= new File("c:/student-dir");
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}

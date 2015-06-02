@@ -30,7 +30,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 		Connection con = null;
 		try {
 			//2.取得Connection
-	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "scott", "tiger");
+	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "scott", "tiger");
 	        String sql = "select id from student s where s.name = ? ";
 	        //3.创建PreparedStatement
 	        PreparedStatement pst = con.prepareStatement(sql);
@@ -65,7 +65,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 		Connection con = null;
 		try {
 			//2.取得Connection
-	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "scott", "tiger");
+	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "scott", "tiger");
 	        String sql = "insert into student(id, name, age, email) values(pkid.nextval, ?, ?, ?)";
 	        //3.创建PreparedStatement
 	        PreparedStatement pst = con.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 		Connection con = null;
 		try {
 			//2.取得Connection
-	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "scott", "tiger");
+	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "scott", "tiger");
 	        String sql = "select id, name, age, email from student";
 	        //3.创建PreparedStatement
 	        PreparedStatement pst = con.prepareStatement(sql);
