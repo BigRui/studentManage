@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>studentManage</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+	<display-name>studentManage</display-name>
+  
+  	<context-param>
+  		<!-- ServletContext中读取到这些配置的参数 -->
+  		<param-name>email</param-name>
+  		<param-value>hello@126.com</param-value>
+  	</context-param>
+  
+  	<filter>
+  		<filter-name>charcode</filter-name>
+  		<filter-class>com.oracle.lnsd.web.CharcodeFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+  		<filter-name>charcode</filter-name>
+		<url-pattern>/*</url-pattern>  
+  	</filter-mapping>
+  
+  	<filter>
+  		<description>处理登陆，如果访问的路径不是login并且session中也没有user则跳转到登陆页面</description>
+  		<filter-name>loginFilter</filter-name>
+  		<filter-class>com.oracle.lnsd.web.LoginFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+  		<filter-name>loginFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+  		<dispatcher>REQUEST</dispatcher>
+  		<!-- 
+	  		<dispatcher>INCLUDE</dispatcher>
+	  		<dispatcher>FORWARD</dispatcher>
+	  		<dispatcher>ERROR</dispatcher>
+  	 	-->
+  	</filter-mapping>
+  
+  	<listener>
+  		<listener-class>com.oracle.lnsd.web.CommonListener
+  		</listener-class>
+  	</listener>
+  
+  	<welcome-file-list>
+    	<welcome-file>user/login</welcome-file>
+  	</welcome-file-list>
 </web-app>

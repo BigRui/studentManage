@@ -57,11 +57,11 @@ public class UserLoginServlet extends HttpServlet {
 	    	if(null != remenberMe) {
 	    		Cookie userNameCookie = new Cookie("userName", userName);
 	    		userNameCookie.setMaxAge(60);
-	    		userNameCookie.setPath("user");
+	    		userNameCookie.setPath(getServletContext().getAttribute("ctx") + "/user");
 	    		response.addCookie(userNameCookie);
 	    		Cookie passwordCookie = new Cookie("password", password);
 	    		passwordCookie.setMaxAge(60);
-	    		passwordCookie.setPath("user");
+	    		passwordCookie.setPath(getServletContext().getAttribute("ctx") + "/user");
 	    		response.addCookie(passwordCookie);
 	    	}
 //	    	User user = new User(null, "admin", "张三", null);
@@ -69,7 +69,7 @@ public class UserLoginServlet extends HttpServlet {
 	    	session.setAttribute("user", user);
 	    	System.out.println("==========================================" + session.getId());
 	    	//如果客户禁用了cookie则需要对url进行编码，url后边会加上jsessionid
-	    	String url = response.encodeRedirectURL("http://localhost:8080/studentManage/student/add");
+	    	String url = response.encodeRedirectURL(getServletContext().getAttribute("ctx") + "/student/add");
 	    	response.sendRedirect(url);
 	    } else {
 	    	//登陆失败了

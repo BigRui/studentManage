@@ -15,7 +15,7 @@
 	<div id="failDiv">
 		${loginFail }
 	</div>
-	<form action="/studentManage/user/login" method="post">
+	<form action="${applicationScope.ctx }/user/login" method="post">
 		<label for="userName">
 			用户名：
 			<input type="text" name="userName" id="userName" value="${cookie.userName.value }"/></label>
