@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
 import com.oracle.lnsd.utils.DButils;
@@ -36,13 +37,13 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
 	        	result = true;
 	        }
         } catch (SQLException e) {
-	        e.printStackTrace();
+        	throw new DaoException("sql–¥¥ÌŒÛ" ,e);
         } finally {
         	if(con != null) {
         		try {
 	                con.close();
                 } catch (SQLException e) {
-	                e.printStackTrace();
+                	throw new DaoException("connectionπÿ±’“Ï≥£" ,e);
                 }
         	}
         }
@@ -65,13 +66,13 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
 	        pst.executeUpdate();
 	       
         } catch (SQLException e) {
-	        e.printStackTrace();
+        	throw new DaoException("sql–¥¥ÌŒÛ" ,e);
         } finally {
         	if(con != null) {
         		try {
 	                con.close();
                 } catch (SQLException e) {
-	                e.printStackTrace();
+                	throw new DaoException("connectionπÿ±’“Ï≥£" ,e);
                 }
         	}
         }
@@ -95,13 +96,13 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
 	        	studentList.add(stu);
 	        }
         } catch (SQLException e) {
-	        e.printStackTrace();
+        	throw new DaoException("sql–¥¥ÌŒÛ" ,e);
         } finally {
         	if(con != null) {
         		try {
 	                con.close();
                 } catch (SQLException e) {
-	                e.printStackTrace();
+                	throw new DaoException("connectionπÿ±’“Ï≥£" ,e);
                 }
         	}
         }

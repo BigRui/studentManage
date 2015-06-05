@@ -18,12 +18,11 @@ public class StudentService {
 	 * @param student
 	 * @return
 	 */
-	public boolean addStudent(Student student){
+	public void addStudent(Student student){
 		if(studentDao.isEntityExists(student.getName())) {
-			return false;
+			throw new ServiceException("用户名已经存在了");
 		} else {
 			this.studentDao.saveEntity(student);
-			return true;
 		}
 	}
 	public List<Student> studentList() {
