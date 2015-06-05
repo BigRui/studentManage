@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.oracle.lnsd.entity.User;
 
 public class LoginFilter implements Filter {
-
+	private String[] ignore;
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -31,17 +31,36 @@ public class LoginFilter implements Filter {
 		HttpSession session = hrequest.getSession();
 		User user = (User) session.getAttribute("user");
 		String url = hrequest.getRequestURI();
+		
 		//如果你访问的不是login页面，并且还没登陆，则跳转到login页面。
-		if(!url.contains("login") && user == null){
+		if(isIgnore(url) || user != null){
+			chain.doFilter(request, response);
+		} else {
 			String ctx = (String) hrequest.getServletContext().getAttribute("ctx");
 			hresponse.sendRedirect(ctx + "/user/login");
-		} else {
-			chain.doFilter(request, response);
 		}
 	}
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
+		ignore = arg0.getInitParameter("ignore").split(",");
+		for (int i = 0; i < ignore.length; i++) {
+			ignore[i] = ignore[i].trim();
+		}
 	}
-
+	/**
+	 * 验证当前访问的url是否放开。
+	 * @param uri
+	 * @return
+	 */
+	private boolean isIgnore(String uri) {
+		boolean result = false;
+		for (int i = 0; i < this.ignore.length; i++) {
+			if(uri.contains(ignore[i])) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
 }

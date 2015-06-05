@@ -35,6 +35,7 @@ public class UserLoginServlet extends HttpServlet {
 //				}
 //			}
 //		}
+//		int i = 1/0;
 		getServletContext().getRequestDispatcher("/WEB-INF/page/user/login.jsp").forward(request, response);
 	}
 	
