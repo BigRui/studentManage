@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="mtg" tagdir="/WEB-INF/tags/mtg" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,14 +20,23 @@
 	}
 	
 </style>
+<script type="text/javascript">
+	window.onload=function(){
+			document.getElementById("sbm").onclick = function(){
+				document.getElementById('currentPage').value = 1;
+			};
+			
+	}
+</script>
 </head>
 <body>
-<%@ include file="/WEB-INF/page/common/header.jsp" %>
-	
+<%@ include file="/WEB-INF/page/common/header.jsp"%>
 	<div>
-		<form action="${ctx }/student/student-list" method="post">
-			学生姓名：<input type="text" name="studentName" value="${param.studentName }" />
-			<input type="submit" value="检索" />
+		<form action="${ctx }/student/student-list" method="get" id="shearchForm">
+			<input type="hidden" id="currentPage" name="currentPage" value="${page.currentPage }"/>
+			<input type="hidden" id="numPerPage" name="numPerPage" value="${page.numPerPage }"/>
+			学生姓名：<input type="text" name="studentName" value="${param.studentName }"/>
+			<input type="submit" value="检索" id="sbm"/>
 		</form>
 	</div>
 	
@@ -40,9 +49,9 @@
 		<th>学生email</th>
 		<th>删除</th>
 	</tr>
-	<c:forEach items="${requestScope.students }" var="stu" varStatus="status">
+	<c:forEach items="${requestScope.page.list }" var="stu" varStatus="status">
 		<tr class="${status.index % 2 == 0 ? 'odd' : ''}">
-			<td>${status.count }</td>
+			<td>${stu.id }</td>
 			<td>${stu.name }</td>
 			<td>${stu.age }</td>
 			<td>${stu.email}</td>
@@ -54,10 +63,14 @@
 			</td>
 		</tr>
 	</c:forEach>
-	
+
 </table>
-<hr />
-<br />
+<hr/>
+<!-- 要分页了 -->
+	<mtg:pg totalPageNum="${page.totalPageNum }" numPerPage="${page.numPerPage }" currentPage="${page.currentPage }" />
+<!-- 分页结束了 -->
+<hr/>
+<br/>
 <a href="${ctx }/student/student-add">添加学生信息</a>
 </body>
 </html>

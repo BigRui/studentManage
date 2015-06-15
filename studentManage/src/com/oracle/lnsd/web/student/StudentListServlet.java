@@ -1,7 +1,6 @@
 package com.oracle.lnsd.web.student;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.oracle.lnsd.entity.Student;
 import com.oracle.lnsd.service.StudentService;
+import com.oracle.lnsd.utils.Page;
 
 /**
  * Servlet implementation class StudentListServlet
@@ -33,13 +35,16 @@ public class StudentListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String studentName = request.getParameter("studentName");
-		if(studentName == null){
-			List<Student> studentList = this.studentService.studentList();
-			request.setAttribute("students", studentList);
+		String numPerPage_str = request.getParameter("numPerPage");
+		String currentPage_str = request.getParameter("currentPage");
+		Page<Student> page = null;
+		if(StringUtils.isNotBlank(currentPage_str) && StringUtils.isNotBlank(numPerPage_str)){
+			page = this.studentService.sharchByName(studentName, Integer.parseInt(currentPage_str), Integer.parseInt(numPerPage_str));
 		} else {
-			List<Student> studentList = this.studentService.sharchByName(studentName);
-			request.setAttribute("students", studentList);
+			page = this.studentService.sharchByName();
 		}
+		
+		request.setAttribute("page", page);
 		getServletContext().getRequestDispatcher("/WEB-INF/page/student/student-list.jsp").forward(request, response);
 	}
 

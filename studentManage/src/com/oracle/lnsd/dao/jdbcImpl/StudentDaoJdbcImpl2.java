@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
@@ -37,7 +39,7 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
 	        	result = true;
 	        }
         } catch (SQLException e) {
-        	throw new DaoException("sql写错误" ,e);
+	        throw new DaoException("sql写错误" ,e);
         } finally {
         	if(con != null) {
         		try {
@@ -79,46 +81,31 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
 
 	}
 
+	
 	@Override
-	public List<Student> listStudent() {
+	public List<Student> sharchByName(String studentName, int offset, int numPerPage) {
 		List<Student> studentList = new ArrayList<>();
 		Connection con = null;
+		if(studentName == null || "".endsWith(studentName.trim())){
+			studentName = "%";
+		} else {
+			studentName = "%" + studentName.trim() + "%";
+		}
 		try {
 			//2.取得Connection
 			 con = DButils.getDbConnection();
-	        String sql = "select id, name, age, email from student";
-	        //3.创建PreparedStatement
-	        PreparedStatement pst = con.prepareStatement(sql);
-	        //4.取得ResultSet
-	        ResultSet rs = pst.executeQuery();
-	        while(rs.next()) {
-	        	Student stu = new Student(rs.getInt("id"), rs.getString("name"), rs.getInt("age"), rs.getString("email"));
-	        	studentList.add(stu);
-	        }
-        } catch (SQLException e) {
-        	throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
-        }
-		return studentList;
-	}
+			 String sql = 
+					 "select * from " +
+					 "(select t.*, rownum rn from " +
+					 "(select id, name, age, email from student where name like ? order by id) t "+
+					 "where rownum < ? "+
+					 ") where rn > ? ";
 
-	@Override
-	public List<Student> sharchByName(String studentName) {
-		List<Student> studentList = new ArrayList<>();
-		Connection con = null;
-		try {
-			//2.取得Connection
-			 con = DButils.getDbConnection();
-			 String sql = "select id, name, age, email from student where name like '%" + studentName + "%'";
 	        //3.创建PreparedStatement
 	        PreparedStatement pst = con.prepareStatement(sql);
+	        pst.setString(1, studentName);
+	        pst.setInt(2, offset + numPerPage + 1);
+	        pst.setInt(3, offset);
 	        //4.取得ResultSet
 	        ResultSet rs = pst.executeQuery();
 	        while(rs.next()) {
@@ -165,6 +152,43 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
         	}
         }
 		
+	}
+
+	@Override
+	public int getTotalNum(String studentName) {
+		int result = 0;
+		Connection con = null;
+		
+		if(StringUtils.isBlank(studentName)){
+			studentName = "%";
+		} else {
+			studentName = "%" + studentName.trim() + "%";
+		}
+		try {
+			//2.取得Connection
+			 con = DButils.getDbConnection();
+			 String sql = "select count(*) from student where name like ?";
+
+	        //3.创建PreparedStatement
+	        PreparedStatement pst = con.prepareStatement(sql);
+	        pst.setString(1, studentName);
+	        //4.取得ResultSet
+	        ResultSet rs = pst.executeQuery();
+	        if(rs.next()) {
+	        	result = rs.getInt(1);
+	        }
+        } catch (SQLException e) {
+        	throw new DaoException("sql写错误" ,e);
+        } finally {
+        	if(con != null) {
+        		try {
+	                con.close();
+                } catch (SQLException e) {
+                	throw new DaoException("connection关闭异常" ,e);
+                }
+        	}
+        }
+		return result;
 	}
 
 }

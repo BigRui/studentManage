@@ -5,6 +5,7 @@ import java.util.List;
 import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.dao.jdbcImpl.StudentDaoJdbcImpl2;
 import com.oracle.lnsd.entity.Student;
+import com.oracle.lnsd.utils.Page;
 /**
  * 学生数据处理的业务逻辑
  * @author Administrator
@@ -25,13 +26,19 @@ public class StudentService {
 			this.studentDao.saveEntity(student);
 		}
 	}
-	public List<Student> studentList() {
-		return this.studentDao.listStudent();
+
+	public Page<Student> sharchByName(String studentName, int currentPage, int numPerPage) {
+		//放入总的行数
+		int totalMum = this.studentDao.getTotalNum(studentName);
+		Page<Student> page = new Page<>(currentPage,numPerPage, totalMum);
+		List<Student> list = this.studentDao.sharchByName(studentName, page.getOffset(), numPerPage);
+		page.setList(list);
+		return page;
 	}
-	public List<Student> sharchByName(String studentName) {
-		List<Student> result = null;
-		result = this.studentDao.sharchByName(studentName);
-		return result;
+	public Page<Student> sharchByName(){
+		int currentPage = Page.DEFAULT_CURRENT_PAGE;
+		int numPerPage = Page.DEFAULT_NUM_PER_PAGE;
+		return this.sharchByName(null, currentPage, numPerPage);
 	}
 	/**
 	 * 根据id删除一个student记录

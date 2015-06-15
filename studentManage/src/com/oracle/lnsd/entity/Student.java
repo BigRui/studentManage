@@ -45,6 +45,10 @@ public class Student implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age
+				+ ", email=" + email + "]";
+	}
     
 }

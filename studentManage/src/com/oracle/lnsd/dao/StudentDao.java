@@ -11,8 +11,7 @@ public interface StudentDao {
 	/**
 	 * 取得所有学生
 	 */
-	List<Student> listStudent();
-	
-	List<Student> sharchByName(String studentName);
+	List<Student> sharchByName(String studentName, int offset, int numPerPage);
 	void deleteById(Integer id);
+	int getTotalNum(String studentName);
 }
