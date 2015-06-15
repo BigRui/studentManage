@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
 
 public class StudentDaoSerializeImpl {// implements StudentDao {

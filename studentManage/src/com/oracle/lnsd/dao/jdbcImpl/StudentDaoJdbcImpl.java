@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
 
 /**
@@ -16,9 +15,9 @@ import com.oracle.lnsd.entity.Student;
  * @author Administrator
  *
  */
-public class StudentDaoJdbcImpl implements StudentDao {
+public class StudentDaoJdbcImpl {// implements StudentDao {
 
-	@Override
+//	@Override
 	public boolean isEntityExists(String name) {
 		boolean result = false;
 		try {
@@ -54,7 +53,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 		return result;
 	}
 
-	@Override
+//	@Override
 	public void saveEntity(Student student) {
 		try {
 			//1.加载数据库驱动
@@ -89,7 +88,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 
 	}
 
-	@Override
+//	@Override
 	public List<Student> listStudent() {
 		List<Student> studentList = new ArrayList<>();
 		try {
@@ -125,7 +124,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 		return studentList;
 	}
 
-	@Override
+//	@Override
 	public List<Student> sharchByName(String studentName) {
 		List<Student> studentList = new ArrayList<>();
 		try {

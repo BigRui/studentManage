@@ -33,4 +33,11 @@ public class StudentService {
 		result = this.studentDao.sharchByName(studentName);
 		return result;
 	}
+	/**
+	 * 根据id删除一个student记录
+	 * @param id
+	 */
+	public void deleteById(Integer id) {
+		this.studentDao.deleteById(id);
+	}
 }

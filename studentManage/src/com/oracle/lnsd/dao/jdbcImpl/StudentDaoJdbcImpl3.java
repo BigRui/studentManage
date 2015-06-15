@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
 import com.oracle.lnsd.utils.DButils;
 
@@ -17,9 +16,9 @@ import com.oracle.lnsd.utils.DButils;
  * @author Administrator
  *
  */
-public class StudentDaoJdbcImpl3 implements StudentDao {
+public class StudentDaoJdbcImpl3 {// implements StudentDao {
 
-	@Override
+//	@Override
 	public boolean isEntityExists(String name) {
 		boolean result = false;
 		Connection con = null;
@@ -49,7 +48,7 @@ public class StudentDaoJdbcImpl3 implements StudentDao {
 		return result;
 	}
 
-	@Override
+//	@Override
 	public void saveEntity(Student student) {
 		Connection con = null;
 		try {
@@ -78,7 +77,7 @@ public class StudentDaoJdbcImpl3 implements StudentDao {
 
 	}
 
-	@Override
+//	@Override
 	public List<Student> listStudent() {
 		List<Student> studentList = new ArrayList<>();
 		Connection con = null;
@@ -108,7 +107,7 @@ public class StudentDaoJdbcImpl3 implements StudentDao {
 		return studentList;
 	}
 
-	@Override
+//	@Override
 	public List<Student> sharchByName(String studentName) {
 		List<Student> studentList = new ArrayList<>();
 		Connection con = null;

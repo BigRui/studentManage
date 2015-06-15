@@ -14,4 +14,5 @@ public interface StudentDao {
 	List<Student> listStudent();
 	
 	List<Student> sharchByName(String studentName);
+	void deleteById(Integer id);
 }

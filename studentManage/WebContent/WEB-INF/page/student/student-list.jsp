@@ -11,11 +11,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>学生一览</title>
 <style type="text/css">
-	.odd{background-color: yellow;}
+	.odd{background-color: AliceBlue;}
+	td,th {
+    border: 1px solid green;
+	}
+	table {
+	    border-collapse: collapse;
+	}
+	
 </style>
 </head>
 <body>
-<%@ include file="../common/header.jsp" %>
+<%@ include file="/WEB-INF/page/common/header.jsp" %>
 	
 	<div>
 		<form action="${ctx }/student/student-list" method="post">
@@ -31,16 +38,26 @@
 		<th>学生姓名</th>
 		<th>学生年龄</th>
 		<th>学生email</th>
+		<th>删除</th>
 	</tr>
 	<c:forEach items="${requestScope.students }" var="stu" varStatus="status">
 		<tr class="${status.index % 2 == 0 ? 'odd' : ''}">
-			<td>${stu.id }</td>
+			<td>${status.count }</td>
 			<td>${stu.name }</td>
 			<td>${stu.age }</td>
 			<td>${stu.email}</td>
+			<td>
+				<form action="${ctx }/student/student-delete" method="post" onsubmit="return confirm('确定删除吗？');">
+					<input type="hidden" name="id" value="${stu.id }"/>
+					<input type="submit" value="删除"/>
+				</form>
+			</td>
 		</tr>
 	</c:forEach>
 	
 </table>
+<hr />
+<br />
+<a href="${ctx }/student/student-add">添加学生信息</a>
 </body>
 </html>

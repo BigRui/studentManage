@@ -70,7 +70,7 @@ public class UserLoginServlet extends HttpServlet {
 	    	session.setAttribute("user", user);
 	    	System.out.println("==========================================" + session.getId());
 	    	//如果客户禁用了cookie则需要对url进行编码，url后边会加上jsessionid
-	    	String url = response.encodeRedirectURL(getServletContext().getAttribute("ctx") + "/student/add");
+	    	String url = response.encodeRedirectURL(getServletContext().getAttribute("ctx") + "/student/student-add");
 	    	response.sendRedirect(url);
 	    } else {
 	    	//登陆失败了

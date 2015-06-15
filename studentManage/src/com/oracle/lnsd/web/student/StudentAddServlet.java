@@ -20,7 +20,7 @@ import com.oracle.lnsd.service.StudentService;
 /**
  * Servlet implementation class AddStudentServlet
  */
-@WebServlet("/student/add")
+@WebServlet("/student/student-add")
 public class StudentAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

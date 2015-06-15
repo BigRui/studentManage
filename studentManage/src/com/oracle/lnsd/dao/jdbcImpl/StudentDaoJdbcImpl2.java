@@ -139,4 +139,32 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
 		return studentList;
 	}
 
+	@Override
+	public void deleteById(Integer id) {
+		Connection con = null;
+		try {
+			//2.取得Connection
+			 con = DButils.getDbConnection();
+	        String sql = "delete from student where id = ?";
+	        //3.创建PreparedStatement
+	        PreparedStatement pst = con.prepareStatement(sql);
+	       	pst.setInt(1, id);
+
+	        //4.取得ResultSet
+	        pst.executeUpdate();
+	       
+        } catch (SQLException e) {
+        	throw new DaoException("sql写错误" ,e);
+        } finally {
+        	if(con != null) {
+        		try {
+	                con.close();
+                } catch (SQLException e) {
+                	throw new DaoException("connection关闭异常" ,e);
+                }
+        	}
+        }
+		
+	}
+
 }
