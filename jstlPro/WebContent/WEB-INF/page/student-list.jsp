@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="mtg" tagdir="/WEB-INF/tags/mtg" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,7 +55,8 @@
 				<fmt:formatDate value="${stu.birthday }" pattern="yyyy/MM-dd HH:mm:ss"/>
 			</td>
 			<td>
-				<fmt:formatNumber value="${stu.salary }" pattern="##,#00.0#"></fmt:formatNumber>
+				<%-- <fmt:formatNumber value="${stu.salary }" pattern="##,#00.0#"></fmt:formatNumber> --%>
+				<mtg:fmt value="${stu.salary }">${stu.name }你看你那点儿破工资:</mtg:fmt>
 			</td>
 			<td>
 				<fmt:formatNumber value="${stu.salary }" type="percent"></fmt:formatNumber>
@@ -98,5 +100,10 @@
 	
 	c:import演示：<hr/>
 	<c:import url="http://www.baidu.com"></c:import>
+	
+	<hr />
+	<hr />
+	<hr />
+	<mtg:loop end="10" start="1">当前值是:${current }<br /></mtg:loop>
 </body>
 </html>
