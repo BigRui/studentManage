@@ -125,4 +125,40 @@ public class StudentDaoJdbcImpl implements StudentDao {
 		return studentList;
 	}
 
+	@Override
+	public List<Student> sharchByName(String studentName) {
+		List<Student> studentList = new ArrayList<>();
+		try {
+			//1.加载数据库驱动
+	        Class.forName("oracle.jdbc.driver.OracleDriver");
+        } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+        }
+		Connection con = null;
+		try {
+			//2.取得Connection
+	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "scott", "tiger");
+	        String sql = "select id, name, age, email from student where name like '%" + studentName + "%'";
+	        //3.创建PreparedStatement
+	        PreparedStatement pst = con.prepareStatement(sql);
+	        //4.取得ResultSet
+	        ResultSet rs = pst.executeQuery();
+	        while(rs.next()) {
+	        	Student stu = new Student(rs.getInt("id"), rs.getString("name"), rs.getInt("age"), rs.getString("email"));
+	        	studentList.add(stu);
+	        }
+        } catch (SQLException e) {
+	        e.printStackTrace();
+        } finally {
+        	if(con != null) {
+        		try {
+	                con.close();
+                } catch (SQLException e) {
+	                e.printStackTrace();
+                }
+        	}
+        }
+		return studentList;
+	}
+
 }

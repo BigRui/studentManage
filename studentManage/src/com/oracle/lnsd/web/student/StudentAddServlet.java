@@ -2,7 +2,6 @@ package com.oracle.lnsd.web.student;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,13 +49,11 @@ public class StudentAddServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		try {
 			this.studentService.addStudent(student);
-			List<Student> studentList = this.studentService.studentList();
-			request.setAttribute("students", studentList);
-			getServletContext().getRequestDispatcher("/WEB-INF/page/student/student-list.jsp").forward(request, response);
+			response.sendRedirect(getServletContext().getAttribute("ctx") + "/student/student-list");
 		} catch (ServiceException | DaoException e) {
 			logger.error("servlet中捕获了一个异常", e);
-			logger.info("这是info级别的");
-			logger.warn("警告级别");
+//			logger.info("这是info级别的");
+//			logger.warn("警告级别");
 			writer.println("保存失败</br>");
 			writer.println("<a href=\"addStudent.html\">跳转到添加页面</a>");
 		}

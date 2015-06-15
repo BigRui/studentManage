@@ -56,24 +56,29 @@ public class CharcodeFilter implements Filter {
 		public String getParameter(String name) {
 		    
 		    String param =  super.getParameter(name);
-		    try {
-	            param = new String(param.getBytes("iso-8859-1"), "utf-8");
-            } catch (UnsupportedEncodingException e) {
-	            e.printStackTrace();
-            }
-		    return param;
+		    if (param != null) {
+				try {
+					param = new String(param.getBytes("iso-8859-1"), "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+			return param;
 		}
 		@Override
 		public String[] getParameterValues(String name) {
 		    String[] params =  super.getParameterValues(name);
-		    try {
-			    for (int i = 0; i < params.length; i++) {
-		            params[i] = new String(params[i].getBytes("iso-8859-1"), "utf-8");
-	            }
-		    } catch (UnsupportedEncodingException e) {
-	            e.printStackTrace();
-            }
-		    return params;
+		    if (params != null) {
+				try {
+					for (int i = 0; i < params.length; i++) {
+						params[i] = new String(
+								params[i].getBytes("iso-8859-1"), "utf-8");
+					}
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+			return params;
 		}
 	}
 }

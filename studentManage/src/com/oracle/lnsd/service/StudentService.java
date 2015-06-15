@@ -28,4 +28,9 @@ public class StudentService {
 	public List<Student> studentList() {
 		return this.studentDao.listStudent();
 	}
+	public List<Student> sharchByName(String studentName) {
+		List<Student> result = null;
+		result = this.studentDao.sharchByName(studentName);
+		return result;
+	}
 }

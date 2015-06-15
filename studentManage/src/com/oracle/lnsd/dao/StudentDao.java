@@ -12,4 +12,6 @@ public interface StudentDao {
 	 * 取得所有学生
 	 */
 	List<Student> listStudent();
+	
+	List<Student> sharchByName(String studentName);
 }

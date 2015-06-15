@@ -7,16 +7,18 @@
 <title>添加学生</title>
 </head>
 <body>
-欢迎：${sessionScope.user.realName }
-<a href="${ctx }/user/logout">退出登陆</a>
+<%@ include file="../common/header.jsp" %>
 <h1>添加学生信息</h1>
-<form action="add" method="post">
+<form action="${ctx }/student/add" method="post">
 		<label> 学生姓名：<input type="text" name="name" id="name" /></label></br>
 		<label> 学生年龄：<input type="text" name="age" id="age" /></label></br>
 		<label> 学生email：<input type="text" name="email" id="email" /></label></br>
 		<input type="submit" value="提交" />
 		<input type="reset" name="" id="" value="重置" />
 	</form>
+	
+	<br />
+	<a href="${ctx }/student/student-list">学生一览<a/>
 </body>
 
 </html>
