@@ -25,6 +25,13 @@ public class StudentListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String studentName = request.getParameter("studentName");
 		if(studentName == null){
 			List<Student> studentList = this.studentService.studentList();
@@ -34,13 +41,6 @@ public class StudentListServlet extends HttpServlet {
 			request.setAttribute("students", studentList);
 		}
 		getServletContext().getRequestDispatcher("/WEB-INF/page/student/student-list.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }

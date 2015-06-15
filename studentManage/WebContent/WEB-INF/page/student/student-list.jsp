@@ -18,8 +18,8 @@
 <%@ include file="../common/header.jsp" %>
 	
 	<div>
-		<form action="${ctx }/student/student-list" method="get">
-			学生姓名：<input type="text" name="studentName" />
+		<form action="${ctx }/student/student-list" method="post">
+			学生姓名：<input type="text" name="studentName" value="${param.studentName }" />
 			<input type="submit" value="检索" />
 		</form>
 	</div>
