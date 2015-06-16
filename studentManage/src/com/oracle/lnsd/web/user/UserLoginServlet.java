@@ -64,6 +64,16 @@ public class UserLoginServlet extends HttpServlet {
 	    		passwordCookie.setMaxAge(60);
 	    		passwordCookie.setPath(getServletContext().getAttribute("ctx") + "/user");
 	    		response.addCookie(passwordCookie);
+	    	} else {
+	    		//如果没有勾选记住用户名密码，则删掉已有的cookie
+	    		Cookie userNameCookie = new Cookie("userName", userName);
+	    		userNameCookie.setMaxAge(0);
+	    		userNameCookie.setPath(getServletContext().getAttribute("ctx") + "/user/");
+	    		response.addCookie(userNameCookie);
+	    		Cookie passwordCookie = new Cookie("password", password);
+	    		passwordCookie.setMaxAge(0);
+	    		passwordCookie.setPath(getServletContext().getAttribute("ctx") + "/user/");
+	    		response.addCookie(passwordCookie);
 	    	}
 //	    	User user = new User(null, "admin", "张三", null);
 	    	HttpSession session = request.getSession();

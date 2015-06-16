@@ -51,7 +51,7 @@
 	</tr>
 	<c:forEach items="${requestScope.page.list }" var="stu" varStatus="status">
 		<tr class="${status.index % 2 == 0 ? 'odd' : ''}">
-			<td>${stu.id }</td>
+			<td>${status.index + 1 }</td>
 			<td>${stu.name }</td>
 			<td>${stu.age }</td>
 			<td>${stu.email}</td>

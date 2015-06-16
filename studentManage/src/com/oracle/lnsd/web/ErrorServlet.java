@@ -33,7 +33,7 @@ public class ErrorServlet extends HttpServlet {
 		Throwable e = (Throwable) req.getAttribute("javax.servlet.error.exception");
 		
 		logger.error("访问以下路径出现异常：" + uri, e);
-		getServletContext().getRequestDispatcher("/WEB-INF/page/error.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/WEB-INF/page/error500.jsp").forward(req, resp);
 	}
 
 	@Override

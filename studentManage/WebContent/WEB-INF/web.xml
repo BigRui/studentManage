@@ -39,7 +39,7 @@
   </listener>
   <error-page>
     <error-code>500</error-code>
-    <location>/error</location>
+    <location>/WEB-INF/page/error500.jsp</location>
   </error-page>
   <error-page>
     <error-code>404</error-code>
