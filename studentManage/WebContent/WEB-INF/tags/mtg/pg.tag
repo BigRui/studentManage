@@ -7,13 +7,14 @@
 <%@ attribute name="shearchFormId"  required="false"%>
 
 <script type="text/javascript">
+	var fms = document.getElementById("${empty shearchFormId ? 'shearchForm':shearchFormId}");
+	fms = fms || document.forms[0];
+	
 	function gotoPage(i) {
-		var fms = document.getElementById("${empty shearchFormId ? 'shearchForm':shearchFormId}");
 		fms.currentPage.value = i;
 		fms.submit();
 	}
 	function changeNumPerPage(i) {
-		var fms = document.forms[0];
 		fms.numPerPage.value = i;
 		fms.submit();
 	}

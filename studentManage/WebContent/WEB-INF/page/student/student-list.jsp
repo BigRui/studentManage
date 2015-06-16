@@ -32,7 +32,7 @@
 <body>
 <%@ include file="/WEB-INF/page/common/header.jsp"%>
 	<div>
-		<form action="${ctx }/student/student-list" method="get" id="shearchForm">
+		<form action="${ctx }/student/student-list" method="get">
 			<input type="hidden" id="currentPage" name="currentPage" value="${page.currentPage }"/>
 			<input type="hidden" id="numPerPage" name="numPerPage" value="${page.numPerPage }"/>
 			学生姓名：<input type="text" name="studentName" value="${param.studentName }"/>
@@ -57,7 +57,7 @@
 			<td>${stu.age }</td>
 			<td>${stu.email}</td>
 			<td>
-				<form action="${ctx }/student/student-update" method="get">
+				<form action="${ctx }/student/student-add" method="get">
 					<input type="hidden" name="id" value="${stu.id }"/>
 					<input type="submit" value="修改"/>
 				</form>

@@ -8,16 +8,17 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/page/common/header.jsp" %>
-<h1>添加学生信息</h1>
+<h1>${requestScope['update-operate'] ? '更新':'添加'}学生信息</h1>
 <form action="${ctx }/student/student-add" method="post">
-		<label> 学生姓名：<input type="text" name="name" id="name" /></label></br>
-		<label> 学生年龄：<input type="text" name="age" id="age" /></label></br>
-		<label> 学生email：<input type="text" name="email" id="email" /></label></br>
+		<input type="hidden" name="id" value="${student.id }"/>
+		<label> 学生姓名：<input type="text" name="name" ${requestScope['update-operate'] ? 'readonly="readonly"': ''} id="name" value="${student.name }"/></label><br/>
+		<label> 学生年龄：<input type="text" name="age" id="age" value="${student.age }"/></label><br/>
+		<label> 学生email：<input type="text" name="email" id="email" value="${student.email }"/></label><br/>
 		<input type="submit" value="提交" />
-		<input type="reset" name="" id="" value="重置" />
+		<input type="reset" value="重置" />
 	</form>
 	
-	<br />
+	<br/>
 	<a href="${ctx }/student/student-list">学生一览<a/>
 </body>
 

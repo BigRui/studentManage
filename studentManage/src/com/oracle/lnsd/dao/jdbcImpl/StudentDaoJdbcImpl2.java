@@ -53,18 +53,28 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
 	}
 
 	@Override
-	public void saveEntity(Student student) {
+	public void saveOrUpdateEntity(Student student) {
 		Connection con = null;
 		try {
 			//2.取得Connection
-			 con = DButils.getDbConnection();
-	        String sql = "insert into student(id, name, age, email) values(pkid.nextval, ?, ?, ?)";
-	        //3.创建PreparedStatement
-	        PreparedStatement pst = con.prepareStatement(sql);
-	        pst.setString(1, student.getName());
-	        pst.setInt(2, student.getAge());
-	        pst.setString(3, student.getEmail());
-	        //4.取得ResultSet
+			con = DButils.getDbConnection();
+	        String sql = null;
+	        PreparedStatement pst = null;
+	        if(student.getId() == null) {
+	        	sql = "insert into student(id, name, age, email) values(pkid.nextval, ?, ?, ?)";
+	        	pst = con.prepareStatement(sql);
+	        	pst.setString(1, student.getName());
+	        	pst.setInt(2, student.getAge());
+	        	pst.setString(3, student.getEmail());
+	        } else {
+	        	sql = "update student set name = ?, age = ?, email = ? where id = ?";
+	        	pst = con.prepareStatement(sql);
+	        	pst.setString(1, student.getName());
+	        	pst.setInt(2, student.getAge());
+	        	pst.setString(3, student.getEmail());
+	        	pst.setInt(4, student.getId());
+	        }
+			//4.取得ResultSet
 	        pst.executeUpdate();
 	       
         } catch (SQLException e) {
@@ -220,36 +230,6 @@ public class StudentDaoJdbcImpl2 implements StudentDao {
         	}
         }
 		return stu;
-	}
-
-	@Override
-	public void updateEntity(Student student) {
-		Connection con = null;
-		try {
-			//2.取得Connection
-			 con = DButils.getDbConnection();
-	        String sql = "update student set name = ?, age = ?, email = ? where id = ?";
-	        //3.创建PreparedStatement
-	        PreparedStatement pst = con.prepareStatement(sql);
-	        pst.setString(1, student.getName());
-	        pst.setInt(2, student.getAge());
-	        pst.setString(3, student.getEmail());
-	        pst.setInt(4, student.getId());
-	        //4.取得ResultSet
-	        pst.executeUpdate();
-	       
-        } catch (SQLException e) {
-        	throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
-        }
-		
 	}
 
 }

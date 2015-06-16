@@ -19,11 +19,12 @@ public class StudentService {
 	 * @param student
 	 * @return
 	 */
-	public void addStudent(Student student){
-		if(studentDao.isEntityExists(student.getName())) {
+	public void saveOrUpdateStudent(Student student){
+		//如果是添加学生，则需要判断姓名是否存在，更新不用判断
+		if(student.getId() == null && studentDao.isEntityExists(student.getName())) {
 			throw new ServiceException("用户名已经存在了");
 		} else {
-			this.studentDao.saveEntity(student);
+			this.studentDao.saveOrUpdateEntity(student);
 		}
 	}
 
@@ -50,7 +51,5 @@ public class StudentService {
 	public Student getById(Integer id) {
 		return this.studentDao.getById(id);
 	}
-	public void updateStudent(Student student) {
-		this.studentDao.updateEntity(student); 
-	}
+	
 }

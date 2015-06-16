@@ -6,7 +6,7 @@ import com.oracle.lnsd.entity.Student;
 
 public interface StudentDao {
 	boolean isEntityExists(String name);
-	void saveEntity(Student student);
+	void saveOrUpdateEntity(Student student);
 	
 	/**
 	 * 取得所有学生
@@ -15,5 +15,4 @@ public interface StudentDao {
 	void deleteById(Integer id);
 	int getTotalNum(String studentName);
 	Student getById(Integer id);
-	void updateEntity(Student student);
 }
