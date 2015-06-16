@@ -3,7 +3,7 @@ package com.oracle.lnsd.service;
 import java.util.List;
 
 import com.oracle.lnsd.dao.StudentDao;
-import com.oracle.lnsd.dao.jdbcImpl.StudentDaoOracleImpl;
+import com.oracle.lnsd.dao.jdbcImpl.StudentDaoH2Impl;
 import com.oracle.lnsd.entity.Student;
 import com.oracle.lnsd.utils.Page;
 /**
@@ -12,7 +12,7 @@ import com.oracle.lnsd.utils.Page;
  *
  */
 public class StudentService {
-	private StudentDao studentDao = new StudentDaoOracleImpl(); 
+	private StudentDao studentDao = new StudentDaoH2Impl(); 
 	
 	/**
 	 * 添加一个学生的业务逻辑
