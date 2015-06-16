@@ -47,4 +47,10 @@ public class StudentService {
 	public void deleteById(Integer id) {
 		this.studentDao.deleteById(id);
 	}
+	public Student getById(Integer id) {
+		return this.studentDao.getById(id);
+	}
+	public void updateStudent(Student student) {
+		this.studentDao.updateEntity(student); 
+	}
 }

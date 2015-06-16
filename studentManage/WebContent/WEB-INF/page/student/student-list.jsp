@@ -43,18 +43,25 @@
 	<hr/>
 	<table>
 	<tr>
-		<th>id</th>
+		<th>序号</th>
 		<th>学生姓名</th>
 		<th>学生年龄</th>
 		<th>学生email</th>
+		<th>修改</th>
 		<th>删除</th>
 	</tr>
 	<c:forEach items="${requestScope.page.list }" var="stu" varStatus="status">
 		<tr class="${status.index % 2 == 0 ? 'odd' : ''}">
-			<td>${status.index + 1 }</td>
+			<td>${status.count + page.offset}</td>
 			<td>${stu.name }</td>
 			<td>${stu.age }</td>
 			<td>${stu.email}</td>
+			<td>
+				<form action="${ctx }/student/student-update" method="get">
+					<input type="hidden" name="id" value="${stu.id }"/>
+					<input type="submit" value="修改"/>
+				</form>
+			</td>
 			<td>
 				<form action="${ctx }/student/student-delete" method="post" onsubmit="return confirm('确定删除吗？');">
 					<input type="hidden" name="id" value="${stu.id }"/>

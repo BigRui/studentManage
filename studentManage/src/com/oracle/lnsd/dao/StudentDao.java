@@ -14,4 +14,6 @@ public interface StudentDao {
 	List<Student> sharchByName(String studentName, int offset, int numPerPage);
 	void deleteById(Integer id);
 	int getTotalNum(String studentName);
+	Student getById(Integer id);
+	void updateEntity(Student student);
 }
