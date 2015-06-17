@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="studentService" class="com.oracle.lnsd.service.StudentService" p:studentDao-ref="studentDao"  lazy-init="true">
+		<!-- 
+		<property name="studentDao" ref="studentDao"></property>
+		 -->
+	</bean>
+	<bean id="studentDao" class="com.oracle.lnsd.dao.StudentDao"></bean>
+	
+	<!-- 通过有参构造函数初始化 -->
+	<bean id="bean1" class="com.oracle.lnsd.beans.Bean1">
+		<constructor-arg index="0" value="张三"></constructor-arg>
+	</bean>
+	<!-- 使用静态工厂方法来初始化bean -->
+	<bean id="bean2" class="com.oracle.lnsd.beans.Bean2StaticFactory" factory-method="build"></bean>
+	<!-- 使用实例工厂方法来初始化bean -->
+	<bean id="bean3Factory" class="com.oracle.lnsd.beans.Bean3Factory"/>
+	<bean id="bean3" factory-bean="bean3Factory" factory-method="build" init-method="initMethod" destroy-method="destroyMethod"/>
+	<!-- 后两种很罕见，但是面试笔试喜欢考 -->
+	
+	<!-- 演示集合的注入 -->
+	<bean id="beanColl" class="com.oracle.lnsd.beans.BeansCollection" p:name="zhangsan">
+		<property name="age" value="123"/>
+		<property name="beanList">
+			<list>
+				<ref bean="bean1"/>
+				<ref bean="bean2"/>
+				<ref bean="bean3"/>
+				<bean class="com.oracle.lnsd.beans.Bean1">
+					<constructor-arg index="0" value="李四"></constructor-arg>
+				</bean>
+			</list>
+		</property>
+		<property name="beanArray">
+			<list>
+				<ref bean="bean1"/>
+				<ref bean="bean2"/>
+				<ref bean="bean3"/>
+				<bean class="com.oracle.lnsd.beans.Bean1">
+					<constructor-arg index="0" value="李四"></constructor-arg>
+				</bean>
+			</list>
+		</property>
+		<property name="beanSet">
+			<set>
+				<ref bean="bean1"/>
+				<ref bean="bean2"/>
+				<ref bean="bean3"/>
+			</set>
+		</property>
+		<property name="beanMap">
+			<map>
+				<entry>
+					<key>
+						<value>第一个bean</value>
+					</key>
+					<ref bean="bean1"/>
+				</entry>
+				<entry>
+					<key>
+						<value>第2个bean</value>
+					</key>
+					<bean class="com.oracle.lnsd.beans.Bean2StaticFactory" factory-method="build"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>
