@@ -13,7 +13,6 @@ import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
 import com.oracle.lnsd.utils.DbSource;
-import com.oracle.lnsd.utils.DbSourceImp;
 
 /**
  * jdbc实现的第二个版本。

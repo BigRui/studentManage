@@ -3,9 +3,7 @@ package com.oracle.lnsd.web.student;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,13 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
 
 import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.entity.Student;
 import com.oracle.lnsd.service.ServiceException;
 import com.oracle.lnsd.service.StudentService;
-import com.oracle.lnsd.web.CommonListener;
 
 /**
  * Servlet implementation class AddStudentServlet
