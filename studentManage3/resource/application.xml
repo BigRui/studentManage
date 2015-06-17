@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Student相关bean -->
+	<bean id="dbSource" class="com.oracle.lnsd.utils.DbSourceImp"/>
+	<bean id="studentDao" class="com.oracle.lnsd.dao.jdbcImpl.StudentDaoOracleImpl">
+		<property name="dbSource" ref="dbSource"/>
+	</bean>
+	<bean id="studentService" class="com.oracle.lnsd.service.StudentService" scope="singleton">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<!-- user相关的bean -->
+	<bean id="userService" class="com.oracle.lnsd.service.UserService" p:userDao-ref="userDao"/>
+	<bean id="userDao" class="com.oracle.lnsd.dao.jdbcImpl.UserDaoOracleImpl" p:dbSource-ref="dbSource"/>
+
+	<bean name="student/student-add" class="com.oracle.lnsd.web.student.StudentAddServlet" p:studentService-ref="studentService"></bean>
+	<bean name="student/student-delete" class="com.oracle.lnsd.web.student.StudentDeleteServlet"  p:studentService-ref="studentService"></bean>
+	<bean name="student/student-list" class="com.oracle.lnsd.web.student.StudentListServlet"  p:studentService-ref="studentService"></bean>
+	<bean name="user/login" class="com.oracle.lnsd.web.user.UserLoginServlet" p:userService-ref="userService"></bean>
+	<bean name="user/logout" class="com.oracle.lnsd.web.user.UserLogoutServlet"></bean>
+	
+</beans>
