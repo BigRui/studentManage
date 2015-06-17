@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="com.oracle.lnsd.service.StudentServiceProxy" x="523" y="244">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.oracle.lnsd.service.StudentServiceInterface"/>
+        <Association
+            destinationClassName="com.oracle.lnsd.service.StudentServiceInterface"
+            endpointName="userServiceInterface" kind="Simple"/>
+        <Communication destinationClassName="com.oracle.lnsd.service.StudentServiceInterface"/>
+    </Class>
+    <Class name="com.oracle.lnsd.service.StudentService" x="223" y="252">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.oracle.lnsd.service.StudentServiceInterface"/>
+    </Class>
+    <Class name="com.oracle.lnsd.service.StudentServiceInterface"
+        x="229" y="36">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+</ClassDiagram>

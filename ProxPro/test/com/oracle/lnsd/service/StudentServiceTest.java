@@ -1,14 +1,20 @@
 package com.oracle.lnsd.service;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.oracle.lnsd.service.dynamicProxy.CglibServiceProxy;
 import com.oracle.lnsd.service.dynamicProxy.DynamicProxyService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:/application.xml")
 public class StudentServiceTest {
-
+	@Autowired
+	private ApplicationContext app;
 	@Test
 	public void test() {
 		StudentServiceInterface studentService = new StudentService();
@@ -43,5 +49,23 @@ public class StudentServiceTest {
 		TeacherService teachers = CglibServiceProxy.bind(ts);
 		teachers.delete();
 		teachers.shearchByName();
+	}
+	@Test
+	public void test4() throws Exception {
+		StudentService studentService = app.getBean("studentServiceProxy", StudentService.class);
+		studentService.saveOrUpdate();
+		studentService.shearchByName();
+	}
+	@Test
+	public void test5() throws Exception {
+		StudentService studentService = app.getBean("studentService", StudentService.class);
+		studentService.saveOrUpdate();
+	}
+	@Test
+	public void test6() throws Exception {
+		UserService userService = app.getBean("userService", UserService.class);
+		userService.delete();
+		System.out.println("==================================");
+		userService.saveOrUpdate();
 	}
 }

@@ -1,10 +1,14 @@
 package com.oracle.lnsd.service;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserService implements UserServiceInterface {
 	
 	@Override
 	public void saveOrUpdate() {
 		System.out.println("保存用户信息");
+		int i = 1/0;
 	}
 	@Override
 	public void delete() {

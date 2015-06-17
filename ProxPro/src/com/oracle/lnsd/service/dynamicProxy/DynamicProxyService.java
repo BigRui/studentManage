@@ -30,7 +30,8 @@ public class DynamicProxyService implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 		boolean flag = false;
-		if(method.getName().contains("save") || method.getName().contains("update") || method.getName().contains("delete")) {
+		String methodName = method.getName();
+		if(methodName.contains("save") || methodName.contains("update") || methodName.contains("delete")) {
 			flag = true;
 		}
 		if(flag){
