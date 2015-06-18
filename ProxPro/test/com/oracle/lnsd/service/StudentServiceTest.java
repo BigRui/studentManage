@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.oracle.lnsd.service.aspectjProxy.MyInterface;
 import com.oracle.lnsd.service.dynamicProxy.CglibServiceProxy;
 import com.oracle.lnsd.service.dynamicProxy.DynamicProxyService;
 
@@ -60,6 +61,9 @@ public class StudentServiceTest {
 	public void test5() throws Exception {
 		StudentService studentService = app.getBean("studentService", StudentService.class);
 		studentService.saveOrUpdate();
+		//看看引介增强成功否
+		MyInterface my = (MyInterface) studentService;
+		my.showMyInterface();
 	}
 	@Test
 	public void test6() throws Exception {
