@@ -6,18 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
-import javax.sql.DataSource;
 
 import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.UserDao;
 import com.oracle.lnsd.entity.User;
+import com.oracle.lnsd.utils.TransactionalAspect;
 
 //@Repository("userDao")
 public class UserDaoOracleImpl implements UserDao {
-	@Resource(name="dbSource")
-	private DataSource dbs;
+	@Resource()
+	private TransactionalAspect dbs;
 	@Override
-	public void setDbSource(DataSource dbSorce) {
+	public void setDbSource(TransactionalAspect dbSorce) {
 		this.dbs = dbSorce;
 		
 	}

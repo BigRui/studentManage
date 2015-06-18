@@ -1,10 +1,13 @@
 package com.oracle.lnsd.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import static org.junit.Assert.*;
 import com.oracle.lnsd.entity.Student;
 import com.oracle.lnsd.utils.Page;
 public class StudentServiceTest {

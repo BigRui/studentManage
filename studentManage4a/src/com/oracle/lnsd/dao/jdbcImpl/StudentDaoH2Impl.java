@@ -7,14 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
+import com.oracle.lnsd.utils.TransactionalAspect;
 
 /**
  * jdbc实现的第二个版本。
@@ -25,10 +24,10 @@ import com.oracle.lnsd.entity.Student;
 
 public class StudentDaoH2Impl implements StudentDao {
 	@Autowired
-	private DataSource dbs;
+	private TransactionalAspect dbs;
 
 	@Override
-	public void setDbSource(DataSource dbSource) {
+	public void setDbSource(TransactionalAspect dbSource) {
 		this.dbs = dbSource;
 	}
 	
@@ -51,14 +50,6 @@ public class StudentDaoH2Impl implements StudentDao {
 	        }
         } catch (SQLException e) {
 	        throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
         }
 		return result;
 	}
@@ -90,16 +81,7 @@ public class StudentDaoH2Impl implements StudentDao {
 	       
         } catch (SQLException e) {
         	throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
         }
-
 	}
 
 	
@@ -131,14 +113,6 @@ public class StudentDaoH2Impl implements StudentDao {
 	        }
         } catch (SQLException e) {
         	throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
         }
 		return studentList;
 	}
@@ -159,14 +133,6 @@ public class StudentDaoH2Impl implements StudentDao {
 	       
         } catch (SQLException e) {
         	throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
         }
 		
 	}
@@ -196,14 +162,6 @@ public class StudentDaoH2Impl implements StudentDao {
 	        }
         } catch (SQLException e) {
         	throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
         }
 		return result;
 	}
@@ -227,17 +185,8 @@ public class StudentDaoH2Impl implements StudentDao {
 	        }
         } catch (SQLException e) {
         	throw new DaoException("sql写错误" ,e);
-        } finally {
-        	if(con != null) {
-        		try {
-	                con.close();
-                } catch (SQLException e) {
-                	throw new DaoException("connection关闭异常" ,e);
-                }
-        	}
         }
 		return stu;
 	}
-
 
 }

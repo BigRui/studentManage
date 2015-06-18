@@ -13,7 +13,7 @@
 	<!-- 启动springaop对aspectj的支持，并且指定必须使用cglib的方式  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<!-- 设定读取properties文件的路径，可以多个配置文件，中间用逗号隔开  -->
-	<context:property-placeholder location="classpath*:/common.properties"/>
+	<context:property-placeholder location="common.properties"/>
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -22,6 +22,6 @@
 	    <property name="password" value="${jdbc.password}"/>
 	</bean>
 	
-	<bean id="studentDao" class="com.oracle.lnsd.dao.jdbcImpl.StudentDaoOracleImpl" p:dbSource-ref="dbSource"/>
-	<bean id="userDao" class="com.oracle.lnsd.dao.jdbcImpl.UserDaoOracleImpl" p:dbSource-ref="dbSource"/>
+	<bean id="studentDao" class="com.oracle.lnsd.dao.jdbcImpl.StudentDaoOracleImpl" p:dbSource-ref="transactionalAspect"/>
+	<bean id="userDao" class="com.oracle.lnsd.dao.jdbcImpl.UserDaoOracleImpl" p:dbSource-ref="transactionalAspect"/>
 </beans>

@@ -2,12 +2,11 @@ package com.oracle.lnsd.dao;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import com.oracle.lnsd.entity.Student;
+import com.oracle.lnsd.utils.TransactionalAspect;
 
 public interface StudentDao {
-	void setDbSource(DataSource dbSource);
+	void setDbSource(TransactionalAspect dbSource);
 	boolean isEntityExists(String name);
 	void saveOrUpdateEntity(Student student);
 	

@@ -5,17 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
 import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.UserDao;
 import com.oracle.lnsd.entity.User;
+import com.oracle.lnsd.utils.TransactionalAspect;
 
 public class UserDaoH2Impl implements UserDao {
-	private DataSource dbs;
+	private TransactionalAspect dbs;
 
 	@Override
-	public void setDbSource(DataSource dbSorce) {
+	public void setDbSource(TransactionalAspect dbSorce) {
 		this.dbs = dbSorce;
 	}
 	@Override
