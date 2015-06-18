@@ -7,8 +7,6 @@ import java.sql.Savepoint;
 
 import org.junit.Test;
 
-import com.oracle.lnsd.utils.DbSourceImp;
-
 /**
  * 帮助大家回忆事务控制
  * @author Administrator
@@ -22,7 +20,7 @@ public class TransactionTest {
 	 * @throws SQLException
 	 */
 	public void test() throws SQLException {
-		Connection connection = new DbSourceImp().getConnection();
+		Connection connection = null;// new DbSourceImp().getConnection();
 		String sql = null;
         sql = "insert into student(id, name, age, email) values(pkid.nextval, ?, ?, ?)";
         PreparedStatement pst = connection.prepareStatement(sql);
@@ -39,7 +37,7 @@ public class TransactionTest {
 	 * @throws Exception
 	 */
 	public void test2() throws Exception {
-		Connection connection = new DbSourceImp().getConnection();
+		Connection connection = null;// new DbSourceImp().getConnection();
 		connection.setAutoCommit(false);
 		Savepoint savepoint = connection.setSavepoint(); //设置回滚点
 		//增删改查

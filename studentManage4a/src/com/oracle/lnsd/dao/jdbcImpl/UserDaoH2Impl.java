@@ -5,22 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
+import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.UserDao;
 import com.oracle.lnsd.entity.User;
-import com.oracle.lnsd.utils.DbSource;
 
 public class UserDaoH2Impl implements UserDao {
-	private DbSource dbs;
+	private DataSource dbs;
 
 	@Override
-	public void setDbSource(DbSource dbSorce) {
+	public void setDbSource(DataSource dbSorce) {
 		this.dbs = dbSorce;
 	}
 	@Override
 	public User findUserByUserName(String userName) {
-		Connection con = dbs.getConnection();
+		Connection con = null;
 		User user = null;
 		try {
+			con = dbs.getConnection();
 	        String sql = "select id, user_name, real_name, password from users u where u.user_name = ?";
 			PreparedStatement prepareStatement = con.prepareStatement(sql);
 			prepareStatement.setString(1, userName);
@@ -33,7 +36,7 @@ public class UserDaoH2Impl implements UserDao {
 	        	user = new User(id, userName2, realName, password);
 	        }
         } catch (SQLException e) {
-	        e.printStackTrace();
+	        throw new DaoException(e);
         }
 		return user;
 	}

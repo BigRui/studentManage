@@ -1,10 +1,11 @@
 package com.oracle.lnsd.dao;
 
+import javax.sql.DataSource;
+
 import com.oracle.lnsd.entity.User;
-import com.oracle.lnsd.utils.DbSource;
 
 public interface UserDao {
-	void setDbSource(DbSource dbSorce);
+	void setDbSource(DataSource dbSorce);
 	User findUserByUserName(String userName);
 
 }

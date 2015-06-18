@@ -7,13 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.oracle.lnsd.dao.DaoException;
 import com.oracle.lnsd.dao.StudentDao;
 import com.oracle.lnsd.entity.Student;
-import com.oracle.lnsd.utils.DbSource;
 
 /**
  * jdbc实现的第二个版本。
@@ -23,10 +24,10 @@ import com.oracle.lnsd.utils.DbSource;
  */
 //@Repository("studentDao")
 public class StudentDaoOracleImpl implements StudentDao {
-	private DbSource dbs;
+	private DataSource dbs;
 	@Override
 	@Autowired
-	public void setDbSource(DbSource dbSource) {
+	public void setDbSource(DataSource dbSource) {
 		this.dbs = dbSource;
 	}
 	@Override
