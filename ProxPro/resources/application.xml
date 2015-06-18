@@ -18,6 +18,24 @@
 	</bean>
 	 -->
 	
+	<!-- 注解的方式使用aspectj -->
+	<bean id="aspectSpring" class="com.oracle.lnsd.service.aspectjProxy.AspectSpring"/>
+	
+	<!-- 使用存配置文件的方式，和注解方式完全相同 -->
+	<!-- 一个增强 -->
+	<bean id="aspectjByXml" class="com.oracle.lnsd.service.aspectjProxy.AspectjByXml"/>
+	<aop:config>
+		<aop:pointcut id="myPointcut" expression="execution(* com.oracle.lnsd.service.*Service.save*(..)) or execution(* com.oracle.lnsd.service.*Service.*update*(..)) or execution(* com.oracle.lnsd.service.*Service.delete*(..))" />
+		<aop:aspect ref="aspectjByXml" >
+			<aop:before method="beforeInAspectjByXml" pointcut-ref="myPointcut"/>
+		</aop:aspect>
+	</aop:config>
 	
 	
+	<!-- 使用实现接口的方式来创建增强 -->
+	<bean id="aspectorProxy" class="com.oracle.lnsd.service.aspectjProxy.AspectorProxy"/>
+	<aop:config>
+		<aop:pointcut id="myPointcut" expression="execution(* com.oracle.lnsd.service.*Service.save*(..)) or execution(* com.oracle.lnsd.service.*Service.*update*(..)) or execution(* com.oracle.lnsd.service.*Service.delete*(..))" />
+		<aop:advisor advice-ref="aspectorProxy" pointcut-ref="myPointcut"/>
+	</aop:config>
 </beans>
