@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oracle.lnsd.dao.StudentDao;
@@ -52,7 +53,7 @@ public class StudentService {
 		
 //		int i = 1/0;
 	}
-	@Transactional(readOnly=true)
+	@Transactional(readOnly=true,propagation=Propagation.SUPPORTS)
 	public Page<Student> sharchByName(String studentName, int currentPage, int numPerPage) {
 		//放入总的行数
 		int totalMum = this.studentDao.getTotalNum(studentName);
@@ -61,7 +62,7 @@ public class StudentService {
 		page.setList(list);
 		return page;
 	}
-	@Transactional(readOnly=true)
+	@Transactional(readOnly=true,propagation=Propagation.SUPPORTS)
 	public Page<Student> sharchByName(){
 		int currentPage = Page.DEFAULT_CURRENT_PAGE;
 		int numPerPage = Page.DEFAULT_NUM_PER_PAGE;
@@ -75,7 +76,7 @@ public class StudentService {
 	public void deleteById(Integer id) {
 		this.studentDao.deleteById(id);
 	}
-	@Transactional(readOnly=true)
+	@Transactional(readOnly=true,propagation=Propagation.SUPPORTS)
 	public Student getById(Integer id) {
 		return this.studentDao.getById(id);
 	}

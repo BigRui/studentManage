@@ -3,12 +3,13 @@ package com.oracle.lnsd.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oracle.lnsd.dao.UserDao;
 import com.oracle.lnsd.entity.User;
 @Service
-@Transactional(readOnly=true)
+@Transactional(readOnly=true,propagation=Propagation.SUPPORTS)
 public class UserService {
 	@Resource
 	private UserDao userDao;
