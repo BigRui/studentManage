@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="com.oracle.lnsd.utils.DbSourceImp" x="951" y="235">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.oracle.lnsd.utils.DbSource"/>
+    </Class>
+    <Class name="com.oracle.lnsd.service.StudentService" x="377" y="175">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="com.oracle.lnsd.dao.StudentDao"
+            endpointName="studentDao" kind="Simple"/>
+        <Communication destinationClassName="com.oracle.lnsd.dao.StudentDao"/>
+    </Class>
+    <Class name="com.oracle.lnsd.web.student.StudentAddServlet" x="234" y="101">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="com.oracle.lnsd.service.StudentService"
+            endpointName="studentService" kind="Simple"/>
+        <Communication destinationClassName="com.oracle.lnsd.service.StudentService"/>
+    </Class>
+    <Class name="com.oracle.lnsd.dao.StudentDao" x="685" y="114">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.oracle.lnsd.dao.jdbcImpl.StudentDaoH2Impl" x="669" y="254">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.oracle.lnsd.dao.StudentDao"/>
+        <Association
+            destinationClassName="com.oracle.lnsd.utils.DbSource"
+            endpointName="dbs" kind="Simple"/>
+        <Communication destinationClassName="com.oracle.lnsd.utils.DbSource"/>
+    </Class>
+    <Class name="com.oracle.lnsd.utils.DbSource" x="900" y="144">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+</ClassDiagram>
