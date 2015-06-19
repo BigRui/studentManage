@@ -27,7 +27,8 @@
 			<tx:method name="save*" propagation="REQUIRED" read-only="false"/>
 			<tx:method name="update*" propagation="REQUIRED" read-only="false"/>
 			<tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
-			<tx:method name="*" read-only="true"/>
+			<!-- 显示配置事务传播行为是最安全的 -->
+			<tx:method name="*" read-only="true" propagation="SUPPORTS"/>
 		</tx:attributes>
 	</tx:advice>
 	
