@@ -2,8 +2,6 @@ package com.oracle.lnsd.dao;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import com.oracle.lnsd.entity.Student;
 
 public interface StudentDao {

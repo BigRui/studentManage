@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,7 +23,7 @@ import com.oracle.lnsd.entity.Student;
  */
 @Repository("studentDao")
 public class StudentDaoOracleImpl implements StudentDao {
-	
+	@Resource
 	private JdbcTemplate jdbcTemplate;
 	
 	private RowMapper<Student> studentRowMapper = new RowMapper<Student>() {
