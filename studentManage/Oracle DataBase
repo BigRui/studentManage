@@ -1,0 +1,2 @@
+通过基本的Servlet方式实现studentManage
+使用serialize、读取本地配置文件、读取服务器端端Resource的方式实现dao

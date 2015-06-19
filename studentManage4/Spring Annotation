@@ -1,0 +1,11 @@
+@Component("dbSource")   //可以标识任意
+@Repository("studentDao")  //标识dao的
+@Service("studentService")   //标识service的
+@Autowired //负责注入，通过类型匹配来注入
+@Resource(name="dbSource") //显示的指定bean的名
+@Resource() //通过名称到对象工厂中找对应的bean，注入
+二者的区别，Autowired默认通过类型匹配注入。Resource默认通过名称匹配来注入，如果通过名称注入失败？再通过类型匹配注入
+
+注解和配置文件的地位完全相同，怎么选用？
+一．	如果易变的东西，放到xml中定义（例如UserDao和StudentDao），不易变的使用annotation
+二．	自己写的类尽量都使用注解，jar包中的类加入的工厂中，只能使用xml的形式。
