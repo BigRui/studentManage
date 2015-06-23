@@ -37,8 +37,12 @@ public class SpringProxyFilter implements Filter {
 			
 		url = url.substring(rootPath.length()+ 1);
 		HttpServlet servlet = app.getBean(url, HttpServlet.class);
-		//将请求交给从容器中取出的Servlet处理
-		servlet.service(req, res);
+		if (servlet != null) {
+			//将请求交给从容器中取出的Servlet处理
+			servlet.service(req, res);
+		} else {
+			chain.doFilter(req, res);
+		}
 		
 	}
 
