@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>studentManage</display-name>
+  <!-- 负责将ApplicationContext加入到ServletContext中的Listener -->
+	<listener>
+  		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath*:/application.xml</param-value>
+	</context-param>
+	
+  <context-param>
+    <param-name>email</param-name>
+    <param-value>hello@126.com</param-value>
+  </context-param>
+  <filter>
+    <filter-name>charcode</filter-name>
+    <filter-class>com.oracle.lnsd.web.CharcodeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>charcode</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  <filter>
+    <description>处理登陆，如果访问的路径不是login并且session中也没有user则跳转到登陆页面</description>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.oracle.lnsd.web.LoginFilter</filter-class>
+    <init-param>
+      <param-name>ignore</param-name>
+      <param-value>
+    		login,
+    		regist,
+    		static,
+    		.css,
+    		.js
+    	</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  <listener>
+    <listener-class>com.oracle.lnsd.web.CommonListener</listener-class>
+  </listener>
+  
+  <filter>
+  	<filter-name>formIdFilter</filter-name>
+  	<filter-class>com.oracle.lnsd.web.FormIdFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>formIdFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+	<!-- 专门拦截所有请求，交给springmvc的servlet -->
+	<servlet>
+	    <servlet-name>remoting</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	    	 <param-name>contextConfigLocation</param-name>
+	  		 <param-value>classpath*:/springmvc-cfg.xml</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>remoting</servlet-name>
+	    <url-pattern>/</url-pattern>
+	</servlet-mapping>
+  
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/page/error500.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/page/error404.jsp</location>
+  </error-page>
+  <welcome-file-list>
+    <welcome-file>user/login</welcome-file>
+  </welcome-file-list>
+</web-app>

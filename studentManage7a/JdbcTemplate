@@ -1,0 +1,40 @@
+1.add spring-web-3.2.5.RELEASE.jar and spring-webmvc-3.2.5.RELEASE.jar
+2.<!-- 负责将ApplicationContext加入到ServletContext中的Listener -->
+	<listener>
+  		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath*:/application.xml</param-value>
+	</context-param>
+3.<!-- 专门拦截所有请求，交给springmvc的servlet -->
+	<servlet>
+	    <servlet-name>remoting</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	    	 <param-name>contextConfigLocation</param-name>
+	  		 <param-value>classpath*:/springmvc-cfg.xml</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>remoting</servlet-name>
+	    <url-pattern>/</url-pattern>
+	</servlet-mapping>
+4.springmvc-cfg.xml
+	<context:component-scan base-package="com.oracle.lnsd.web">
+		<context:include-filter type="annotation" 
+		expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<!-- 开启支持注解方式来寻找对应请求的Controller -->
+	<mvc:annotation-driven/>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+	  <property name="prefix" value="/WEB-INF/page/"/>
+	  <property name="suffix" value=".jsp"/>
+	</bean>
+5.application.xml
+	<context:component-scan base-package="com.oracle.lnsd">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
