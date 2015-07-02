@@ -8,11 +8,15 @@
 * 可以在web.xml文件中<servlet>下，初始化参数
 * 整个web容器是在维护一个ServletContext对象
 * ServletContext--绝对路径（推荐）	ServletRequest--相对路径
+
 ---
+
 # Serializable
 >
 * 实体类序列化，信息保存在硬盘上。
+
 ---
+
 # Thread
 >
 * 多线程访问一个变量安全：
@@ -24,7 +28,9 @@
 * Properties是Map的一个实现类，内部键值对结构
 * DButils.class.getResourceAsStream("/common.properties");"/"：代表classes路径下的根路径，相对于DButils类而言
 * forward:将request和response向下一个对象提交，对于客户端url不变   redirect:告诉浏览器跳转到另一个页面
+
 ---
+
 # Other
 >
 * 端口号冲突可以尝试在进程中结束javaw.exe进程
