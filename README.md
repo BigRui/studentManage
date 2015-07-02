@@ -1,5 +1,5 @@
 # studentManage
----
+
 # Servlet
 >
 * 页面放在WEB-INF下是访问不到的，该文件夹被写保护。
@@ -8,6 +8,16 @@
 * 可以在web.xml文件中<servlet>下，初始化参数
 * 整个web容器是在维护一个ServletContext对象
 * ServletContext--绝对路径（推荐）	ServletRequest--相对路径
+* request(请求)的生命周期是一次请求,request中属性的生命周期，就是request的生命周期
+* session(会话)也可以setAttribute()放入键值对。生命周期:从打开浏览器到关闭浏览器,或调用invalidate()方法。session有唯一Id,键值对JSESSIONID=50856973093D0820A9997AF645204C3E,服务器根据客户端的JSESSIONID识别每个用户.在Internet选项-隐私中可以禁用cookie
+* 为防止服务器内存被占用满了，能放到request中不放到session中
+* 监听器ServletContextListener，当ServletContext生成好和销毁的时候调用监听器中的初始化和销毁方法
+* servletContext中也放键值对，但属于公共区域.由tomcat第一次打开创建对象往里放东西，其他人知识从中读取
+* 把浏览器关闭了其实服务器器端是不知道的
+* 服务器返回的键值对保存到客户端cookie中，用户每次访问服务器都携带cookie。每组键值对都是一个cookie
+* Properties是Map的一个实现类，内部键值对结构
+* DButils.class.getResourceAsStream("/common.properties");"/"：代表classes路径下的根路径，相对于DButils类而言
+* forward:将request和response向下一个对象提交，对于客户端url不变   redirect:告诉浏览器跳转到另一个页面
 
 ---
 
@@ -25,9 +35,7 @@
 * 3.或者某一变量不想修改，加final修饰
 * 4.Class AtomicInteger 他的父类是Number 他是线程安全的
 * 5.尽量使用局部变量，只有方法内部访问，方法结束就销毁了
-* Properties是Map的一个实现类，内部键值对结构
-* DButils.class.getResourceAsStream("/common.properties");"/"：代表classes路径下的根路径，相对于DButils类而言
-* forward:将request和response向下一个对象提交，对于客户端url不变   redirect:告诉浏览器跳转到另一个页面
+
 
 ---
 
@@ -41,23 +49,11 @@
 * 工具类里的方法都是静态的。（习惯）
 * ctrl + 1 快速查看错误信息
 * ctrl+2 create local var;
+* http协议是无状态的
 
 M:model--service
 V:view--jsp
 C:controller--servlet/struts/spring...
-
-服务器返回的键值对保存到客户端cookie中，用户每次访问服务器都携带cookie。每组键值对都是一个cookie
-
-request(请求)的生命周期是一次请求,request中属性的生命周期，就是request的生命周期
-session(会话)也可以setAttribute()放入键值对。生命周期:从打开浏览器到关闭浏览器,或调用invalidate()方法。session有唯一Id,键值对JSESSIONID=50856973093D0820A9997AF645204C3E,服务器根据客户端的JSESSIONID识别每个用户.在Internet选项-隐私中可以禁用cookie
-为防止服务器内存被占用满了，能放到request中不放到session中
-http协议是无状态的
-
-servletContext中也放键值对，但属于公共区域.由tomcat第一次打开创建对象往里放东西，其他人知识从中读取。
-
-监听器ServletContextListener，当ServletContext生成好和销毁的时候调用监听器中的初始化和销毁方法
-
-把浏览器关闭了其实服务器器端是不知道的。
 
 >
 强转做了些什么？欺骗java编译器，告诉它这里我确定是什么类型，你编译就行了，根本就不会改变对象的类型。
