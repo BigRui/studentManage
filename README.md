@@ -46,5 +46,4 @@ servletContext中也放键值对，但属于公共区域.由tomcat第一次打�
 栈中保存临时变量，堆区保存对象，方法区保存的是类型信息、方法数据结构、静态成员。 
 刚才的req和reqs都是在栈区中的临时变量，它们共同指向堆区的同一个对象，你对req这个遥控器强制类型转换，根本不会影响到堆区中的电视机。
 
-JPBM表结构和使用说明
-http://search.sina.com.cn/?q=JBPM%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%AF%B4%E6%98%8E&ie=utf-8&e=utf-8&range=article&t=&s=sup&by=all&type=&stype=1&c=blog
+[JPBM表结构和使用说明](http://search.sina.com.cn/?q=JBPM%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%AF%B4%E6%98%8E&ie=utf-8&e=utf-8&range=article&t=&s=sup&by=all&type=&stype=1&c=blog)
